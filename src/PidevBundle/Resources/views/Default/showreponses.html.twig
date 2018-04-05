@@ -1,0 +1,83 @@
+<script src="{{ asset('jquery-3.2.1.min.js') }}"></script>
+<script>
+    $(function() {
+        $("#supprimer").click(function () {
+            var idreponse=$('#p1').text();
+            var iduser=$('#p2').text();
+            var DATA = {
+                'idreponse':idreponse,
+                'iduser':iduser
+
+            };
+            $.ajax({
+                type:"POST",
+                url:"{{ path('Delete_reponse') }}",
+                data:DATA,
+                success:function(data) {
+                    alert(data);
+                }
+            });
+        });
+    });
+</script>
+<script>
+    $(function() {
+        $("#btn4").click(function () {
+            var idreponse=$('#p1').text();
+            alert(idreponse);
+            var iduser=$('#p2').text();
+            alert(iduser);
+            var objet=$('#input1').val();
+            alert(objet);
+            var idcommentaire=$('#p4').text();
+            alert(idcommentaire);
+            var DATA = {
+                'idreponse':idreponse,
+                'iduser':iduser,
+                'objet':objet,
+                'idcommentaire':idcommentaire
+
+            };
+            $.ajax({
+                type:"POST",
+                url:"{{ path('update_reponse') }}",
+                data:DATA,
+                success:function(data) {
+                    alert(data);
+                }
+            });
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('#update').click(function () {
+            $('#p3').show();
+
+
+        });
+    });
+
+</script>
+
+
+
+{% for reponse in reponses %}
+<table>
+  <tr>
+    <td>{{ reponse.id_user.nom }}{{ reponse.id_user.prenom }}</td>
+    <td>{{ reponse.contenu }} </td>
+    <td>{{ reponse.date|date }}</td>
+    <td><p hidden="hidden" id="p1">{{ reponse.id }}</p></td>
+    <td><p hidden="hidden" id="p2">{{ reponse.id_user.id }}</p></td>
+      <td><p hidden="hidden" id="p4">{{ reponse.id_commentaire.id }}</p></td>
+  </tr>
+    <td><input type="submit" value="supprimer" id="supprimer"></td>
+    <td> <input type="submit" id="update" value="update"></td>
+    <tr hidden="hidden" id="p3">
+        <td><input type="text" id="input1"></td>
+        <td> <input type="submit" value="valider l update" id="btn4"></td>
+    </tr>
+</table>
+
+{% endfor %}

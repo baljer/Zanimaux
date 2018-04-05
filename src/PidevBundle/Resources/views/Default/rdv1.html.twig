@@ -1,0 +1,129 @@
+{% extends 'PidevBundle::layoutMembre.html.twig' %}
+{% block title %}
+ prise redv
+{% endblock %}
+{% block contenu %}
+<!--start slider -->
+<link rel="stylesheet" href={{ asset('css/fwslider.css') }} media="all">
+<script src={{ asset('js/jquery-ui.min.js') }}></script>
+<script src={{ asset('js/fwslider.js') }}></script>
+
+<!--end slider -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".dropdown img.flag").addClass("flagvisibility");
+
+        $(".dropdown dt a").click(function() {
+            $(".dropdown dd ul").toggle();
+        });
+
+        $(".dropdown dd ul li a").click(function() {
+            var text = $(this).html();
+            $(".dropdown dt a span").html(text);
+            $(".dropdown dd ul").hide();
+            $("#result").html("Selected value is: " + getSelectedValue("sample"));
+        });
+
+        function getSelectedValue(id) {
+            return $("#" + id).find("dt a span.value").html();
+        }
+
+        $(document).bind('click', function(e) {
+            var $clicked = $(e.target);
+            if (! $clicked.parents().hasClass("dropdown"))
+                $(".dropdown dd ul").hide();
+        });
+
+
+        $("#flagSwitcher").click(function() {
+            $(".dropdown img.flag").toggleClass("flagvisibility");
+        });
+    });
+</script>
+</head>
+
+<div class="banner">
+    <!-- start slider -->
+    <div id="fwslider">
+        <div class="slider_container">
+            <div class="slide">
+                <!-- Slide image -->
+                <img src={{ asset('images/toiletteur.jpg') }} class="img-responsive" alt=""/>
+                <!-- /Slide image -->
+                <!-- Texts container -->
+                <div class="slide_content">
+                    <div class="slide_content_wrap">
+                        <!-- Text title -->
+                        <h1 class="title">Welcome we are <br>groomers</h1>
+
+                    </div>
+                </div>
+                <!-- /Texts container -->
+            </div>
+            <!-- /Duplicate to create more slides -->
+            <div class="slide">
+                <img src={{ asset('images/vetoo.jpg') }} class="img-responsive" alt=""/>
+                <div class="slide_content">
+                    <div class="slide_content_wrap">
+                        <h1 class="title">For the care of your animal<br>veterinarians</h1>
+                    </div>
+                </div>
+            </div>
+            <!--/slide -->
+        <div class="slide">
+            <img src={{ asset('images/dressage.jpg') }} class="img-responsive" alt=""/>
+            <div class="slide_content">
+                <div class="slide_content_wrap">
+                    <h1 class="title">For the train your pet<br>trainer are here</h1>
+                </div>
+            </div>
+        </div>
+            <div class="slide">
+                <img src={{ asset('images/a.jpg') }} class="img-responsive" alt=""/>
+                <div class="slide_content">
+                    <div class="slide_content_wrap">
+                        <h1 class="title">be happy for you animal<br>Animalsitting is here</h1>
+                    </div>
+                </div>
+            </div>
+        <!--/slide -->
+    </div>
+        <div class="timers"></div>
+        <div class="slidePrev"><span></span></div>
+        <div class="slideNext"><span></span></div>
+    </div>
+    <!--/slider -->
+    <br>
+    <div align="center">
+
+        {{ form_start(f) }}
+        {{ form_widget(f.type_service,{'attr':{'class':'style'}}) }}
+        {{ form_widget(f.adresse,{'attr':{'class':'style'}}) }}
+        {{ form_widget(f.chercher,{'attr':{'class':'style'}}) }}
+        {{ form_end(f) }}</div>
+    <div>
+        {% for u in users %}
+            <form> <fieldset>
+
+                    <table>
+                        <tr>
+                            <td> <img src="{{ asset(u.url_image) }}" id="1"/> {{ u.nom }} {{ u.prenom }}
+                            {{ u.information }} {{ u.adresse }}
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td><a href="{{ path('prendre_rdv',{'id':u.id })}}"><input type="button" value="prendre rendez_vous"></a></td>
+
+                        </tr>
+                    </table>
+                </fieldset>
+            </form>
+
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+
+

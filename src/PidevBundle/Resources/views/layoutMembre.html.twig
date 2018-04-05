@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+    <title>Zanimaux - {% block title %}{% endblock %}</title>
+    <link href={{ asset('css/bootstrap2.css') }} rel='stylesheet' type='text/css'/>
+    <link href={{ asset('css/style2.css') }} rel='stylesheet' type='text/css'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <link href="{{ asset('css/style2.css') }}" rel='stylesheet' type='text/css'/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        } </script>
+    <script src={{ asset('js/jquery.min.js') }}></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".dropdown img.flag").addClass("flagvisibility");
+
+            $(".dropdown dt a").click(function () {
+                $(".dropdown dd ul").toggle();
+            });
+
+            $(".dropdown dd ul li a").click(function () {
+                var text = $(this).html();
+                $(".dropdown dt a span").html(text);
+                $(".dropdown dd ul").hide();
+                $("#result").html("Selected value is: " + getSelectedValue("sample"));
+            });
+
+            function getSelectedValue(id) {
+                return $("#" + id).find("dt a span.value").html();
+            }
+
+            $(document).bind('click', function (e) {
+                var $clicked = $(e.target);
+                if (!$clicked.parents().hasClass("dropdown"))
+                    $(".dropdown dd ul").hide();
+            });
+
+
+            $("#flagSwitcher").click(function () {
+                $(".dropdown img.flag").toggleClass("flagvisibility");
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="header-left">
+                    <div class="logo">
+                        <a href="index.html"><img src="{{ asset('images/zanimaux.png') }}" width="60"/></a>
+                    </div>
+                    <div class="menu">
+                        <a class="toggleMenu" href="#"><img src={{ asset('images/nav.png') }} alt=""/></a>
+                        <ul class="nav" id="nav">
+                            <li><a href="shop.html">Profil</a></li>
+                            <li><a href="team.html">Messages</a></li>
+                            <li><a href="shop.html">Events/Contest</a></li>
+                            <li><a href="shop.html">Posts</a></li>
+                            <li>
+                                <a>RDV</a>
+                                      <ul class="submenu">
+                                      <li><a href="{{ path('chercher') }}">Ajouter votre rendez vous</a></li>
+                                      <li><a href="{{ path('afficher') }}">Consulter votre rendez vous</a></li>
+
+                                  </ul>
+
+
+
+                            </li>
+
+
+
+                            <li><a href="experiance.html">Forum</a></li>
+                            <div class="clear"></div>
+                        </ul>
+                        <script type="text/javascript" src={{ asset('js/responsive-nav.js') }}></script>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="header_right">
+                    <a class="active-icon c1" href="{{ path('pidev_login') }}"> </a>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="main">
+
+        {% block contenu %}
+
+        {% endblock %}
+
+</div>
+<div class="footer">
+    <div class="container"><br><br>
+        <div class="row">
+            <div class="col-md-3">
+                <ul class="footer_box">
+                    <h4>Products</h4>
+                    <li><a href="#">Mens</a></li>
+                    <li><a href="#">Womens</a></li>
+                    <li><a href="#">Youth</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="footer_box">
+                    <h4>About</h4>
+                    <li><a href="#">Careers and internships</a></li>
+                    <li><a href="#">Sponserships</a></li>
+                    <li><a href="#">team</a></li>
+                    <li><a href="#">Catalog Request/Download</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="footer_box">
+                    <h4>Customer Support</h4>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Shipping and Order Tracking</a></li>
+                    <li><a href="#">Easy Returns</a></li>
+                    <li><a href="#">Warranty</a></li>
+                    <li><a href="#">Replacement Binding Parts</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="footer_box">
+                    <h4>Newsletter</h4>
+                    <div class="footer_search">
+                        <form>
+                            <input type="text" value="Enter your email" onfocus="this.value = '';"
+                                   onblur="if (this.value == '') {this.value = 'Enter your email';}">
+                            <input type="submit" value="Go">
+                        </form>
+                    </div>
+                    <ul class="social">
+                        <li class="facebook"><a href="#"><span> </span></a></li>
+                        <li class="twitter"><a href="#"><span> </span></a></li>
+                        <li class="instagram"><a href="#"><span> </span></a></li>
+                        <li class="pinterest"><a href="#"><span> </span></a></li>
+                        <li class="youtube"><a href="#"><span> </span></a></li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+</body>
+</html>

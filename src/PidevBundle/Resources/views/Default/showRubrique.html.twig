@@ -1,0 +1,87 @@
+<!Doctype html>
+<head>
+
+    <title>rubrique_sanitaire</title>
+   <script src="{{ asset('jquery-3.2.1.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+
+            $("#h").click(function () {
+                $("#f").show();
+
+
+            });
+
+        });
+    </script>
+
+</head>
+<body>
+    {% for rubrique in rubriques %}
+       <h1>{{ rubrique.titre }} </h1>
+        <h3>{{ rubrique.date|date('Y-M-d') }}</h3> <br> <br>
+          <p> {{ rubrique.contenu }}</p>
+        <img src="{{ asset('uploads/images/')}}{{ rubrique.image }}" width="300" height="200">
+        <a href="{{ asset('uploads/images/' ~ rubrique.brochure) }}">View brochure (PDF)</a>
+        <div>
+            <input type="button" id="h" value="commenter" align="center"></div> <br> <br>
+
+        <div><a href="{{ path('showcomments',{'id':rubrique.id })}}" class="o">{{ rubrique.nbcommentaire }} les commentaires</a> </div>
+        <div hidden="hidden" id="f">
+            <form id="form1">
+            <input type="text" name="ob" id="ob">
+        <p id="idpub"hidden="hidden">{{ rubrique.id}}</p>
+            <input type="submit" value="valider" id="btn1">
+            </form>
+        </div>
+
+    {% endfor %}
+
+    <script>
+        $(document).ready(function () {
+
+            $("#form1").submit(function(event) {
+                event.preventDefault();
+                var objet = $('#ob').val();
+                var id_publication=$('#idpub').html();
+                var DATA = {'id_publication':id_publication,'objet':objet};
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('ajoutercomments') }}",
+                    data: DATA,
+                    success: function (data) {
+                        alert(data);
+
+                    }
+                });
+
+            });
+          });
+    </script>
+
+    <script type="text/javascript">
+        ('#form1').hidden();
+        $('.o').click(function(){
+
+            var url = $(this).attr('href').replace(/.html.twig/,'-showcomments.html.twig');
+            $.ajax({
+                url: url,
+                success: function(text){
+                    $('#2').html('').append($('<div class="#pl"></div>').html(text));
+                }
+            });
+            return false;
+        });
+
+
+
+    </script>
+<div id="2">
+
+
+</div>
+
+</body>
+</html>
+
+

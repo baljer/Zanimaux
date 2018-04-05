@@ -1,0 +1,66 @@
+pidev_homepage:
+    path:     /index
+    defaults: { _controller: PidevBundle:Default:index }
+
+pidev_front_homepage:
+    path:     /front
+    defaults: { _controller: PidevBundle:Default:indexFront }
+
+pidev_back_homepage:
+    path:     /back
+    defaults: { _controller: PidevBundle:Default:indexBack }
+
+pidev_login:
+    path:     /login1
+    defaults: { _controller: PidevBundle:Default:login }
+prendre_rendez_vous:
+    path:     /rdv
+    defaults: { _controller: PidevBundle:Default:prendre_Rdv }
+chercher:
+    path:     /fournisseur
+    defaults: { _controller: PidevBundle:Rdv:Affichagefournisseur }
+afficher:
+    path:     /aff
+    defaults: { _controller: PidevBundle:Rdv:afficherrdvpurmembre }
+prendre_rdv:
+    path:     /c/{id}
+    defaults: { _controller: PidevBundle:Rdv:ajoutRdv }
+compter:
+    path:     /d
+    defaults: { _controller: PidevBundle:Rdv:compter1 }
+delete_rendez_vous:
+    path:     /v
+    defaults: { _controller: PidevBundle:Rdv:delete }
+update_rendez_vous:
+    path:     /m
+    defaults: { _controller: PidevBundle:Rdv:update }
+ajouter_rubrique:
+    path:     /z
+    defaults: { _controller: PidevBundle:Rubrique_sanitaire:ajouterRubrique }
+afficher_rubrique:
+    path:     /e
+    defaults: { _controller: PidevBundle:Rubrique_sanitaire:afficheRubrique }
+showcomments:
+    path:     /r/{id}
+    defaults: { _controller: PidevBundle:Commentaire_rubrique:affichercommentaire }
+ajoutercomments:
+    path:     /ajout
+    defaults: { _controller: PidevBundle:Commentaire_rubrique:ajoutercommentaire }
+Delete_comment:
+    path:     /s
+    defaults: { _controller: PidevBundle:Commentaire_rubrique:supprimerCommentaire }
+update_comment:
+    path:     /u
+    defaults: { _controller: PidevBundle:Commentaire_rubrique:updateCommentaire }
+Repondre_comment:
+    path:     /rr
+    defaults: { _controller: PidevBundle:ReponseC:ajouterreponse }
+afficher_reponse:
+    path:     /aa/{id}
+    defaults: { _controller: PidevBundle:ReponseC:afficherreponse }
+Delete_reponse:
+    path:     /dd
+    defaults: { _controller: PidevBundle:ReponseC:supprimerreponse }
+update_reponse:
+    path:     /uu
+    defaults: { _controller: PidevBundle:ReponseC:updatereponse }

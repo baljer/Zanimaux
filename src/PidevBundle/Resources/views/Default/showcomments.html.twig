@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<head>
+    <script src="{{ asset('jquery-3.2.1.min.js') }}"></script>
+
+    <script>
+        $(document).ready(function() {
+            $('#update').click(function () {
+                $('#f').show();
+
+
+            });
+        });
+
+    </script>
+    <script>
+        $(function() {
+            $("#btn").click(function () {
+                var objet = $('#objet').val();
+                var id=$('#dd').text();
+                var id1=$('#iduser').text();
+                alert(id1);
+                var DATA = {
+                    'id':id,
+                    'objet':objet,
+                    'id1':id1
+
+                };
+                $.ajax({
+                    type:"POST",
+                    url:"{{ path('update_comment') }}",
+                    data:DATA,
+                    success:function(data) {
+                        alert(data);
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        $(function() {
+            $("#supprimer").click(function () {
+                var id=$('#dd').text();
+                var DATA = {
+                    'id':id
+
+                };
+                $.ajax({
+                    type:"POST",
+                    url:"{{ path('Delete_comment') }}",
+                    data:DATA,
+                    success:function(data) {
+                        alert(data);
+                    }
+                });
+            });
+        });
+    </script>
+
+</head>
+<body>
+<div id="pl">
+
+    {% for comment in comments %}
+        <table>
+             <td>
+                 <td>{{ comment.iduser.nom }}{{ comment.iduser.prenom }}</td>
+                   <td>{{ comment.objet }} </td>
+                 <td>{{ comment.date|date }}</td>
+               <td> <p id="dd" hidden="hidden"> {{ comment.id }}</p> </td>
+            <td> <p id="iduser" hidden="hidden"> {{ comment.iduser.id }}</p> </td>
+                 <td><input type="submit" value="repondre" id="repondre"></td>
+                 <td><input type="submit" value="supprimer" id="supprimer"></td>
+                 <td> <input type="submit" id="update" value="update"></td>
+            <td><a href="{{ path('afficher_reponse',{'id':comment.id })}}">afficherReponse
+                </a> </td>
+
+             </tr>
+
+            <tr hidden="hidden" id="tr1">
+                <td>
+                    <input type="text" id="input1">
+                <td>
+                    <input type="submit" id="btn2">
+                </td>
+
+                </tr>
+
+
+
+
+               </table>
+{% endfor %}
+
+<p id="f" hidden="hidden">
+    <input type="text" id="objet">
+    <input type="submit" value="confirmer" id="btn">
+</p>
+
+<script>
+    $(document).ready(function() {
+        $('#repondre').click(function () {
+            $('#tr1').show();
+
+
+        });
+    });
+
+</script>
+    <script>
+
+        $(function() {
+            $("#btn2").click(function () {
+                var objet = $('#input1').val();
+                var id=$('#dd').text();
+                var DATA = {
+                    'id':id,
+                    'objet':objet
+
+                };
+                $.ajax({
+                    type:"POST",
+                    url:"{{ path('Repondre_comment') }}",
+                    data:DATA,
+                    success:function(data) {
+                        alert(data);
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
+
+
+</div>
+</body>
+</html>

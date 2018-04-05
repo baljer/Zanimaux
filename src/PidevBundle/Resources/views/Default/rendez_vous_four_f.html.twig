@@ -1,0 +1,197 @@
+<html>
+<head>
+    <script src="{{ asset('jquery-3.2.1.min.js') }}"></script>
+    <style>
+
+      img{
+            display:inline-block;
+            width: 200px;
+            height: 200px;
+            border: none;
+
+
+        }
+        #divimage{
+
+            display: inline-block;
+            text-align: center;
+            background-position:center ;
+
+        }
+        #divimage a{
+            text-decoration: none;
+            width: 200px;
+            height: 200px;
+            display: inline-block;
+            position: relative;
+        }
+      #divimage a span{
+            position: absolute;
+            top: 25px;
+            left: 20px;
+          display: none;
+        }
+        #divimage a:hover span{
+
+            display: block;
+        }
+      #divimage span.title{
+            position: absolute;
+            top: 45px;
+            left: 15px;
+            color:#f0f0f0;
+            font-weight: bolder;
+            font-size: 1.2em;
+          z-index:2;
+        }
+        #divimage span.bg
+        {
+            top: 0;
+            left:0;
+            height: 200px;
+            width:200px;
+            bakground:#000;
+            z-index: 1;
+
+        }
+
+
+
+    </style>
+
+
+
+</head>
+<body>
+
+<div id="divimage">
+    <a href="#">
+        <span class="title">le nombre de rendez vous d 'aujourd'hui est: {{ nombre1 }}</span>
+        <span class="bg"></span>
+<img src={{ asset('images/e7.jpg') }} alt="" id="image1"/></a> <br> <br>
+    <input type="submit" value="Today" id="btn1">
+</div>
+<div id="divimage">
+    <a href="#">
+        <span class="title">le nombre de rendez vous de demain est: {{ nombre2 }}</span>
+        <span class="bg"></span>
+        <img src={{ asset('images/e7.jpg') }} alt="" id="image2"/></a> <br> <br>
+    <input type="submit" value="tomorrow" id="btn2">
+</div>
+<div id="divimage">
+    <a href="#">
+        <span class="title">le nombre de rendez vous pendant cette semaine est: {{ nombre3 }}</span>
+        <span class="bg"></span>
+        <img src={{ asset('images/e7.jpg') }} alt="" id="image3"/></a> <br> <br>
+    <input type="submit" value="this week" id="btn3">
+</div>
+
+<br> <br>
+<script>
+    $(function() {
+        $('#btn1').click(function () {
+            $("#div1").show();
+            $("#div2").hide();
+            $("#div2").hide();
+        });
+    });
+
+</script>
+<script>
+    $(function() {
+        $("#btn2").click(function () {
+            $("#div1").hide();
+            $("#div2").show();
+            $("#div3").hide();
+        });
+    });
+
+</script>
+<script>
+    $(function() {
+        $("#btn3").click(function () {
+
+            $("#div1").hide();
+            $("#div2").hide();
+            $("#div3").show();
+
+        });
+    });
+
+</script>
+
+<div id="div1" hidden="hidden">
+    {% for rdv in rdvs1 %}
+        <form> <fieldset>
+                <table>
+                    <tr>
+                        <td> <label>Date du rendez vous </label></td>
+                        <td> {{ rdv.dateRdv|date }}</td></tr>
+                    <tr>
+                        <td> <img src="{{ asset(rdv.idMembre.url_image) }}"/></td>
+
+                    <tr>
+                        <td> {{ rdv.idMembre.nom }} {{ rdv.idMembre.prenom }}</td></tr>
+                    <tr>
+
+                        <td>  {{ rdv.typeConsultation }}</td></tr>
+
+                </table>
+            </fieldset>
+        </form>
+
+    {% endfor %}
+</div>
+
+<div id="div2" hidden="hidden">
+    {% for rdv1 in rdvs2 %}
+        <form> <fieldset>
+                <table>
+                    <tr>
+                        <td> <label>Date du rendez vous </label></td>
+                        <td> {{ rdv1.dateRdv|date }}</td></tr>
+                    <tr>
+                        <td> <img src="{{ asset(rdv1.idMembre.url_image) }}"/></td>
+
+                    <tr>
+                        <td> {{ rdv1.idMembre.nom }} {{ rdv1.idMembre.prenom }}</td></tr>
+                    <tr>
+
+                        <td>  {{ rdv1.typeConsultation }}</td></tr>
+
+                </table>
+            </fieldset>
+        </form>
+
+    {% endfor %}
+</div>
+
+<div id="div3" hidden="hidden">
+    {% for rdv2 in rdvs3 %}
+        <form> <fieldset>
+                <table>
+                    <tr>
+                        <td> <label>Date du rendez vous </label></td>
+                        <td> {{ rdv2.dateRdv|date }}</td></tr>
+                    <tr>
+                        <td> <img src="{{ asset(rdv2.idMembre.url_image) }}"/></td>
+
+                    <tr>
+                        <td> {{ rdv2.idMembre.nom }} {{ rdv2.idMembre.prenom }}</td></tr>
+                    <tr>
+
+                        <td>  {{ rdv2.typeConsultation }}</td></tr>
+
+                </table>
+            </fieldset>
+        </form>
+
+    {% endfor %}
+</div>
+
+</body>
+
+
+
+
+</html>

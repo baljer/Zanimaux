@@ -1,0 +1,171 @@
+{% extends 'PidevBundle::layoutMembre.html.twig' %}
+{% block title %}
+    afficher les rendez_vous du membre
+{% endblock %}
+{% block contenu %}
+<script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/lib/moment.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/fullcalendar.min.js') }}"></script>
+<link rel="stylesheet" href="{{ asset('bundles/fullcalendar/css/fullcalendar/fullcalendar.min.css') }}" />
+<script type="text/javascript" src="{{ asset('bundles/fullcalendar/js/fullcalendar/fullcalendar.default-settings.js') }}"></script>
+<script type="text/javascript"
+        src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
+</script>
+<script type="text/javascript"
+        src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
+</script>
+<script type="text/javascript"
+        src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js">
+</script>
+<link rel="stylesheet" type="text/css" media="screen"
+      href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
+<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+
+<script>
+
+    $(document).ready(function () {
+
+      var selecteddate=new  Date();
+            $('#5').fullCalendar({
+
+                header: {
+                    left: 'prev, next',
+                    center: 'title',
+                    right: 'month'
+                },
+                selectable:true,
+                editable:false,
+                selectHelper:true,
+                height:500,
+                width:2,
+
+
+                eventClick: function(calEvent, jsEvent, view) {
+                   $("#cal").show();
+                       // $("#startTime").val(moment(calEvent.start).format('YYYY-MM-DD HH:mm:ss'));
+                    $("#titre").html(calEvent.title);
+                    $("#description").html(calEvent.descritption);
+                    $("#idfournisseur").html(calEvent.id);
+
+
+
+                },
+                dayClick:function (date,allDay,jsEvent,view) {
+                    selecteddate=date;
+                    alert(selecteddate.format('YYYY-MM-DD HH:mm:ss'));
+                },
+                eventSources: [
+                    { events: [
+                   {
+                        {% for rdv in rdvs %}
+                       descritption:'{{ rdv.idr }}',
+                       title:' {{ rdv.typeConsultation }}',
+                       start:'{{ rdv.dateRdv|date }}',
+                        id:'{{ rdv.idFournisseur.id }}',
+                          {% endfor %}
+
+
+
+                   }
+
+
+                        ],
+                        color: 'pink',
+                        textColor: 'white'}
+
+
+]
+            });
+        });
+
+</script>
+
+<div id="cal" hidden="hidden">
+    <input type="button" value="suprimer" id="lien1" onClick="window.location.reload()">
+    <input type="button" value="update" id="lien2"></div>
+   <script>
+       $(document).ready(function () {
+         $('#lien1').click(function () {
+             var id = $(description).text();
+
+             var DATA = {
+                 'id': id,
+
+             };
+             $.ajax({
+                 type: "POST",
+                 url:"{{ path('delete_rendez_vous') }}",
+                 data: DATA,
+
+                 success:function(data) {
+                     alert($data);
+                 }
+
+             });
+         });
+       });
+   </script>
+<script>
+    $(document).ready(function () {
+        $('#lien2').click(function () {
+            $('#type1').show();
+        });});
+</script>
+<script>
+
+    $(document).ready(function () {
+        $('#v1').click(function () {
+    var id =$(description).text();
+    var datte=$(startTime).val();
+    var id_fourni=$(idfournisseur).text();
+    alert(id_fourni);
+
+    var DATA = {
+        'id': id,
+        'datte':datte,
+        'id_fourni':id_fourni
+
+    };
+    $.ajax({
+        type: "POST",
+        url:"{{ path('update_rendez_vous') }}",
+        data: DATA,
+
+        success:function(data) {
+            alert($data);
+        }
+
+    });
+    });
+    })
+
+</script>
+
+<div id="5"> </div>
+<p id="description" hidden="hidden"></p>
+<p id="idfournisseur" hidden="hidden"></p>
+
+<div hidden="hidden" id="type1">
+
+<div id="date" class="input-append date">
+    <input type="text" id="startTime"> Time du rendez vous :</input><br>
+    <span class="add-on">
+                <i date-time-icon="icon-time" date-date-icon="icon-calendar"></i>
+               </span> </div>
+type consultation:<p id="titre"></p>
+    <input type="submit" value="valider" id="v1" onClick="window.location.reload()">
+</div>
+<script type="text/javascript">
+    $('#date').datetimepicker({
+        format: 'yyyy-MM-dd hh:mm:ss',
+        language: 'en'
+    });
+</script>
+
+</div>
+{% endblock %}
+
+
+

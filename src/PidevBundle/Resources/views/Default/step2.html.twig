@@ -1,0 +1,504 @@
+<!Doctype html>
+<head>
+    <link href={{ asset('css/bootstrap2.css') }} rel='stylesheet' type='text/css'/>
+    <link href={{ asset('css/style2.css') }} rel='stylesheet' type='text/css'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <link href="{{ asset('css/style2.css') }}" rel='stylesheet' type='text/css'/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        } </script>
+    <script src={{ asset('js/jquery.min.js') }}></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".dropdown img.flag").addClass("flagvisibility");
+
+            $(".dropdown dt a").click(function () {
+                $(".dropdown dd ul").toggle();
+            });
+
+            $(".dropdown dd ul li a").click(function () {
+                var text = $(this).html();
+                $(".dropdown dt a span").html(text);
+                $(".dropdown dd ul").hide();
+                $("#result").html("Selected value is: " + getSelectedValue("sample"));
+            });
+
+            function getSelectedValue(id) {
+                return $("#" + id).find("dt a span.value").html();
+            }
+
+            $(document).bind('click', function (e) {
+                var $clicked = $(e.target);
+                if (!$clicked.parents().hasClass("dropdown"))
+                    $(".dropdown dd ul").hide();
+            });
+
+
+            $("#flagSwitcher").click(function () {
+                $(".dropdown img.flag").toggleClass("flagvisibility");
+            });
+        });
+    </script>
+<script src="{{ asset('jquery-3.2.1.min.js') }}"></script>
+<link rel="stylesheet" type="text/css" media="screen"
+href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
+<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <script type="text/javascript"
+            src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+    </script>
+    <script type="text/javascript"
+            src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
+    </script>
+    <script type="text/javascript"
+            src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
+    </script>
+    <script type="text/javascript"
+            src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js">
+    </script>
+
+<script>
+
+    $(document).ready(function(){
+        if ($("#4").text()=="Veterinaire")
+        {
+            $("#select1").show();
+            $("#select2").hide();
+            $("#select3").hide();
+            $("#select4").hide();
+        }
+       else
+           if($("#4").text()=="Dresseur")
+        {
+           $("#select2").show();
+            $("#select1").hide();
+            $("#select3").hide();
+            $("#select4").hide();
+        }
+       else
+           if($("#4").text()=="Toiletteur")
+        {
+            $("#select3").show();
+            $("#select1").hide();
+            $("#select2").hide();
+            $("#select4").hide();
+        }
+
+       else
+        {
+            $("#select4").show();
+            $("#select3").hide();
+            $("#select1").hide();
+            $("#select2").hide();
+        }
+
+    });
+
+
+</script>
+
+    <script>
+        $(function(){
+            $("#select1").click(function() {
+                if($('#select1 option:selected').val()=="Stérilisation")
+                {
+
+                    $("#input3").val(15);
+                    $("#hihi").html("Stérilisation");
+                }
+                if($('#select1 option:selected').val()=="chirurgies exploratoires")
+                {
+                    $("#input3").val(25);
+                    $("#hihi").html("chirurgies exploratoires");
+
+                }
+                if($('#select1 option:selected').val()=="chirurgies spécialisées")
+                {
+                    $("#input3").val(30);
+                    $("#hihi").html("chirurgies spécialisées");
+                }
+                if($('#select1 option:selected').val()=="Radiographie numérique")
+                {
+                    $("#input3").val(40);
+                    $("#hihi").html("Radiographie numérique");
+                }
+                if($('#select1 option:selected').val()=="Échographies abdominales exploratoires")
+                {
+                    $("#input3").val(70);
+                    $("#hihi").html("Échographies abdominales exploratoires");
+                }
+                if($('#select1 option:selected').val()=="prélèvements écho-guidés")
+                {
+                    $("#input3").val(75);
+                    $("#hihi").html("prélèvements écho-guidés");
+                }
+                if($('#select1 option:selected').val()=="Dentisterie et radiographies dentaires")
+                {
+                    $("#input3").val(80);
+                    $("#hihi").html("Dentisterie et radiographies dentaires");
+                }
+            });
+        });
+    </script>
+    <!--2 eme select-->
+    <script>
+        $(function(){
+            $("#select2").click(function() {
+                if($('#select2 option:selected').val()=="Entrainement pour chiot")
+                {
+
+                    $("#input3").html(25);
+                    $("#hihi").html("Entrainement pour chiot");
+                }
+                if($('#select2 option:selected').val()=="Entrainement pour chien")
+                {
+                    $("#input3").val(25);
+                    $("#hihi").html("Entrainement pour chien");
+
+                }
+                if($('#select2 option:selected').val()=="Bonnes manieres")
+                {  $("#input3").val(40);
+                    $("#hihi").html("Bonnes manieres");
+                }
+                if($('#select2 option:selected').val()=="obeissance")
+                {
+                    $("#input3").val(60);
+                    $("#hihi").html("obeissance");
+                }
+                if($('#select2 option:selected').val()=="modification comportemental")
+                {
+                    $("#input3").val(90);
+                    $("#hihi").html("modification comportemental");
+                }
+                if($('#select2 option:selected').val()=="sportif")
+                {
+                    $("#input3").val(80);
+                    $("#hihi").html("sportif");
+                }
+
+            });
+        });
+
+    </script>
+    <!--3 eme select-->
+    <script>
+
+        if($('#select3 option:selected').val()=="Brossage fourrure")
+        {
+            $("#input3").val(10);
+            $("#hihi").html("Brossage fourrure");
+        }
+        if($('#select3 option:selected').val()=="Brossage plume")
+        {
+            $("#input3").val(15);
+            $("#hihi").html("Brossage plume");
+        }
+        if($('#select3 option:selected').val()=="nettoyage des oreilles du chien")
+        {
+            $("#input3").val(35);
+            $("#hihi").html("nettoyage des oreilles du chien");
+        }
+        if ($('#select3 option:selected').val()=="Rasage électronique")
+        {
+            $("#input3").val(20);
+            $("#hihi").html("Rasage électronique");
+        }
+        if ($('#select3 option:selected').val()=="enlever les poils morts")
+        {
+            $("#input3").val(30);
+            $("#hihi").html("enlever les poils morts");
+        }
+        if ($('#select3 option:selected').val()=="vidange des sacs anaux")
+        {
+            $("#input3").val(45);
+            $("#hihi").html("vidange des sacs anaux");
+        }
+
+
+
+    </script>
+    <!-- select4
+    -->
+    <script>
+    if ($('#select4 option:selected').val()=="effectuer une promenade hygiénique")
+    {
+    $("#input3").val(25);
+        $("#hihi").html("effectuer une promenade hygiénique");
+    }
+    if($('#select4 option:selected').val()=="nourrir l'animal")
+    {
+    $("#input3").val(15);
+        $("#hihi").html("nourrir l'animal");
+    }
+    if($('#select4 option:selected').val()==" changer sa litière")
+    {
+    $("#input3").val(10);
+        $("#hihi").html("changer sa litière");
+    }
+    if ($('#select4 option:selected').val()=="accueillir les animaux à son domicile")
+    {
+    $("#input3").val(40);
+        $("#hihi").html("accueillir les animaux à son domicile");
+    }
+    </script>
+
+
+
+<style>
+    #map{
+        height:150px;
+        width:50%;
+        position:absolute;
+        top: 280px;
+        right: 20px;
+
+
+
+    }
+
+</style>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGVb962wKER2y5YsbLn_MtFXzfWhbsiH8&callback=initMap"
+    ></script>
+
+
+<script>
+    $(function() {
+        $("#btn1").click(function (event) {
+            event.preventDefault();
+            var type_consultation = $(hihi).text();
+            var prix = $(input3).val();
+            var id_fourni = $(id_fournisseur).text();
+            var nom = $(input1).val();
+            var prenom = $(input2).val();
+            var email = $(input5).val();
+            var datte = $(d).val();
+            var DATA = {
+                'type_consultation': type_consultation,
+                'prix': prix,
+                'id_fourni': id_fourni,
+                'nom': nom,
+                'prenom': prenom,
+                'email': email,
+                'datte': datte
+            };
+            $.ajax({
+                type: "POST",
+                url:"{{ path('prendre_rdv', { 'id' : u.id}) }}",
+                data: DATA,
+
+                success:function(data) {
+                    alert($data);
+                }
+            });
+        });
+    });
+</script>
+</head>
+<body>
+<div>
+    <div class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="header-left">
+                        <div class="logo">
+                            <a href="index.html"><img src="{{ asset('images/zanimaux.png') }}" width="60"/></a>
+                        </div>
+                        <div class="menu">
+                            <a class="toggleMenu" href="#"><img src={{ asset('images/nav.png') }} alt=""/></a>
+
+                          <li><p >welecome chez {{ u.nom }} {{ u.prenom }}  <br>
+                                    vous etes les bienvenus
+                                </p></li>
+
+                            <script type="text/javascript" src={{ asset('js/responsive-nav.js') }}></script>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="header_right">
+                        <a class="active-icon c1" href="{{ path('pidev_login') }}"> </a>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <style>
+            p{
+                align:center;
+                font-size: large;
+                font-weight: bold;
+                color: #b10837;
+            }
+        </style>
+    </div>
+<div align="center">
+    <img src="{{ asset(u.url_image) }}">
+    <p> {{ u.nom }} {{ u.prenom }}</p>
+    <p> {{ u.information }}</p>
+    <p hidden="hidden" id="latitude">{{ u.lat }}</p>
+    <p id="longitude" hidden="hidden">{{ u.lng }}</p>
+    <p id="4" hidden="hidden">{{ u.typeservice }}</p>
+    <p id="image" hidden="hidden">{{ u.image }}</p>
+    <p id="ville" hidden="hidden">{{ u.ville }}</p></div>
+<div>
+    <form method="POST" id="form1" >
+    <table>
+
+        <tr>
+            <td><label>entrez votre nom</label></td>
+            <td><input type="text" id="input1" placeholder="nom" name="nom" required></td>
+        </tr>
+        <tr>
+            <td><label>entrez votre prenom</label></td>
+            <td><input type="text" id="input2" placeholder="prenom" name="prenom" required></td>
+        </tr>
+        <tr>
+            <td><label> enterez votre email</label></td>
+            <td><input type="email" id="input5"  name="email" placeholder="nom@gmail.com" required></td>
+        </tr>
+        <tr>
+            <td><label>choissisez la date du votre rendez vous</label></td>
+            <td>
+                <div id="date" class="input-append date">
+                    <input type="text"  name="datte" id="d">
+                    <span class="add-on">
+                    <i date-time-icon="icon-time" date-date-icon="icon-calendar"></i>
+                </span>
+                </div></td>
+        </tr>
+        <tr>
+            <td > <label>type consultation</label></td>
+            <td id="7">
+                <select id="select1" hidden="hidden" required>
+                    <option id="2" value="Stérilisation">Stérilisation</option><option id="3" value="chirurgies exploratoires">chirurgies exploratoires</option>
+                    <option id="4" value="chirurgies spécialisées">chirurgies spécialisées</option><option id="5" value="Radiographie numérique">Radiographie numérique</option>
+                    <option id="6" value="Échographies abdominales exploratoires">Échographies abdominales exploratoires</option><option id="7" value="prélèvements écho-guidés">prélèvements écho-guidés</option>
+                    <option id="8" value="Dentisterie et radiographies dentaires">Dentisterie et radiographies dentaires</option>
+                </select>
+                <select id="select2"  hidden="hidden" required>
+                    <option id="9" value="Entrainement pour chiot">Entrainement pour chiot</option><option id="10" value="Entrainement pour chien">Entrainement pour chien</option>
+                    <option id="11" value="Bonnes manieres">Bonnes manieres</option><option id="12" value="obeissance">obeissance</option>
+                    <option id="13" value="modification comportemental">modification comportemental</option><option id="14" value="sportif">sportif</option>
+                </select>
+                <select id="select3" hidden="hidden" required>
+                    <option id="15" value="Brossage fourrure">Brossage fourrure</option><option id="16" value="Brossage plume">Brossage plume</option>
+                    <option id="17" value="Rasage électronique">Rasage électronique</option><option id="18" value="enlever les poils morts">enlever les poils morts</option>
+                    <option id="19" value="nettoyage des oreilles du chien">"nettoyage des oreilles du chien</option><option id="20" value="vidange des sacs anaux">vidange des sacs anaux</option>
+                </select>
+                <select id="select4"  hidden="hidden" required>
+                    <option id="21" value="effectuer une promenade hygiénique">effectuer une promenade hygiénique</option><option id="22" value="nourrir l'animal">nourrir l'animal</option>
+                    <option id="23" value="changer sa litière"> changer sa litière</option><option id="24" value="accueillir les animaux à son domicile">accueillir les animaux à son domicile</option>
+                </select>
+            </td>
+        </tr>
+
+
+        <tr><td><label>le prix du consultation</label>
+            </td>
+            <td ><input type="number" id="input3" placeholder="prix" name="prix"></td>
+            <td><p id="hihi" hidden="hidden"></p></td>
+           <td><p hidden="hidden" id="id_fournisseur">{{ u.id }}</p></td>
+        </tr>
+
+    </table>
+     <input type="button"value="submit" id="btn1">
+    </form>
+    <script>
+        var k=parseFloat($(latitude).text());
+        var j=parseFloat($(longitude).text());
+        var z=$(image).text();
+        var w=$(ville).text();
+
+        function initMap()
+        { var options={
+            zoom:8,
+            center:{lat:k,lng:j}
+        }
+            var map=new google.maps.Map(document.getElementById('map'),options);
+
+            var marker=new google.maps.Marker({
+                position:{lat:k,lng:j},
+                map:map,
+
+            });
+            var infowindow=new google.maps.InfoWindow({
+                content:w
+            });
+            marker.addListener('click',function (){
+                infowindow.open(map,marker);
+            });
+        }
+
+    </script>
+    <script type="text/javascript">
+        $('#date').datetimepicker({
+            format: 'yyyy-MM-dd hh:mm:ss',
+            language: 'en'
+        });
+    </script>
+
+</div>
+    <div id="map" ></div>
+</div>
+<div class="footer">
+    <div class="container"><br><br>
+        <div class="row">
+            <div class="col-md-3">
+                <ul class="footer_box">
+                    <h4>Products</h4>
+                    <li><a href="#">Mens</a></li>
+                    <li><a href="#">Womens</a></li>
+                    <li><a href="#">Youth</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="footer_box">
+                    <h4>About</h4>
+                    <li><a href="#">Careers and internships</a></li>
+                    <li><a href="#">Sponserships</a></li>
+                    <li><a href="#">team</a></li>
+                    <li><a href="#">Catalog Request/Download</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="footer_box">
+                    <h4>Customer Support</h4>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Shipping and Order Tracking</a></li>
+                    <li><a href="#">Easy Returns</a></li>
+                    <li><a href="#">Warranty</a></li>
+                    <li><a href="#">Replacement Binding Parts</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="footer_box">
+                    <h4>Newsletter</h4>
+                    <div class="footer_search">
+                        <form>
+                            <input type="text" value="Enter your email" onfocus="this.value = '';"
+                                   onblur="if (this.value == '') {this.value = 'Enter your email';}">
+                            <input type="submit" value="Go">
+                        </form>
+                    </div>
+                    <ul class="social">
+                        <li class="facebook"><a href="#"><span> </span></a></li>
+                        <li class="twitter"><a href="#"><span> </span></a></li>
+                        <li class="instagram"><a href="#"><span> </span></a></li>
+                        <li class="pinterest"><a href="#"><span> </span></a></li>
+                        <li class="youtube"><a href="#"><span> </span></a></li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
