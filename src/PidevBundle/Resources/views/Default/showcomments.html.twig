@@ -1,7 +1,148 @@
 <!DOCTYPE html>
 <head>
+
+</head>
+<body>
+<div id="pl">
     <script src="{{ asset('jquery-3.2.1.min.js') }}"></script>
 
+
+    <script>
+        $(function() {
+            $("#supprimer").click(function () {
+                var id=$('#dd').text();
+                var DATA = {
+                    'id':id
+
+                };
+                $.ajax({
+                    type:"POST",
+                    url:"{{ path('Delete_comment') }}",
+                    data:DATA,
+                    success:function(data) {
+                        alert(data);
+                    }
+                });
+            });
+        });
+    </script>
+    <style>
+        fieldset{
+            border: 1px solid rgb(255, 124, 250);
+            width: 600px;
+            margin:auto;
+        }
+        .bo1{
+            background-color:#b10837;
+            text-align: right;
+            padding: 7px 7px;
+            text-decoration: none;
+            text-transform: uppercase;
+            color: #FFFFFF;
+            size:20cm;
+            display: block;
+            position: relative;
+            left:0%;
+            top:-5px;
+
+        }
+        .bo11{
+            background-color:#b10837;
+            text-align: right;
+            padding: 4px 4px;
+            text-decoration: none;
+            text-transform: uppercase;
+            color: #FFFFFF;
+            size:10cm;
+
+
+        }
+        .cc1{
+            color: #0b0b0b;
+            font-weight: bold;
+            font-size: large;
+            text-align: left;
+        }
+        .cc2{
+            color: #0b0b0b;
+            font-weight: normal;
+            font-size:medium;
+            left:100%;
+
+        }
+
+
+    </style>
+
+    {% for comment in comments %}
+        <form><fieldset>
+        <table>
+             <tr>
+                 <td> <img src="{{ asset(comment.iduser.url_image) }}" width=60 height="60"> <label class="cc1">{{ comment.objet }}</label> <div class="cc2">{{ comment.iduser.nom }}{{ comment.iduser.prenom }}</div></td>
+
+             </tr>
+                <tr>
+                    <td>{{ comment.date|date }}</td>
+                    <td><input type="button" value="repondre" id="repondre" class="bo1"></td>
+                 <td><input type="button" value="supprimer" id="supprimer" class="bo1"></td>
+                 <td> <input type="button" id="update" value="update" class="bo1"></td>
+            <td><a href="{{ path('afficher_reponse',{'id':comment.id })}}">afficherReponse
+                </a> </td>
+             </tr>
+            <tr>
+                <td>
+                    <div id="f" hidden="hidden" align="center">
+                        <input type="text" id="objet" class="haha">
+                        <input type="submit" value="confirmer" id="btn" class="bo11">
+                    </div></td>
+                <td> <p id="dd" hidden="hidden"> {{ comment.id }}</p> </td>
+                <td> <p id="iduser" hidden="hidden"> {{ comment.iduser.id }}</p> </td>
+            </tr>
+
+            <tr hidden="hidden" id="tr1">
+                <td>
+                    <input type="text" id="input1">
+                <td>
+                    <input type="submit" id="btn2">
+                </td>
+                <td><p id="idpub"hidden="hidden">{{comment.id_publication.id}}</p></td>
+
+                </tr>
+        </table>
+
+            </fieldset>
+        </form>
+{% endfor %}
+    <form id="form1">
+        <fieldset>
+            <div align="center">
+        <input type="text" name="ob" id="ob">
+        <input type="submit" value="commenter" id="btn1" class="bo11"></div>
+        </fieldset>
+    </form>
+
+    <script>
+        $(document).ready(function () {
+
+            $("#form1").submit(function(event) {
+                event.preventDefault();
+                var objet = $('#ob').val();
+                var id_publication=$('#idpub').html();
+                var DATA = {'id_publication':id_publication,'objet':objet};
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('ajoutercomments') }}",
+                    data: DATA,
+                    success: function (data) {
+                        alert(data);
+
+                    }
+                });
+                document.location = "{{ path('afficher_rubrique') }}";
+            });
+
+        });
+    </script>
     <script>
         $(document).ready(function() {
             $('#update').click(function () {
@@ -36,65 +177,8 @@
             });
         });
     </script>
-    <script>
-        $(function() {
-            $("#supprimer").click(function () {
-                var id=$('#dd').text();
-                var DATA = {
-                    'id':id
-
-                };
-                $.ajax({
-                    type:"POST",
-                    url:"{{ path('Delete_comment') }}",
-                    data:DATA,
-                    success:function(data) {
-                        alert(data);
-                    }
-                });
-            });
-        });
-    </script>
-
-</head>
-<body>
-<div id="pl">
-
-    {% for comment in comments %}
-        <table>
-             <td>
-                 <td>{{ comment.iduser.nom }}{{ comment.iduser.prenom }}</td>
-                   <td>{{ comment.objet }} </td>
-                 <td>{{ comment.date|date }}</td>
-               <td> <p id="dd" hidden="hidden"> {{ comment.id }}</p> </td>
-            <td> <p id="iduser" hidden="hidden"> {{ comment.iduser.id }}</p> </td>
-                 <td><input type="submit" value="repondre" id="repondre"></td>
-                 <td><input type="submit" value="supprimer" id="supprimer"></td>
-                 <td> <input type="submit" id="update" value="update"></td>
-            <td><a href="{{ path('afficher_reponse',{'id':comment.id })}}">afficherReponse
-                </a> </td>
-
-             </tr>
-
-            <tr hidden="hidden" id="tr1">
-                <td>
-                    <input type="text" id="input1">
-                <td>
-                    <input type="submit" id="btn2">
-                </td>
-
-                </tr>
 
 
-
-
-               </table>
-{% endfor %}
-
-<p id="f" hidden="hidden">
-    <input type="text" id="objet">
-    <input type="submit" value="confirmer" id="btn">
-</p>
 
 <script>
     $(document).ready(function() {

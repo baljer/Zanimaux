@@ -17,13 +17,18 @@ class RdvController extends Controller
 
     function AffichagefournisseurAction(Request $request)
     {$user = new User();
-        $form = $this->createForm(rdvbyserviceForm::class, $user);
+        $form = $this->createForm(rdvbyserviceForm::class,$user);
 
         $form->handleRequest($request);
-            $field = $user->getTypeService();
+        if($form->isSubmitted())
+        {
+           $field = $user->getTypeService();
             $field1 = $user->getAdresse();
             $users = $this->getDoctrine()
-                ->getRepository(User::class)->findfournisseur($field, $field1);
+                ->getRepository(User::class)->findfournisseur($field, $field1);}
+                else
+                {  $users = $this->getDoctrine()
+            ->getRepository(Rdv::class)-> afficherfournisseur();}
 
 
         return $this->render('PidevBundle:Default:rdv1.html.twig',

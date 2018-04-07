@@ -1,7 +1,8 @@
-<!Doctype html>
-<head>
-
-    <title>rubrique_sanitaire</title>
+{% extends 'PidevBundle::layoutMembre.html.twig' %}
+{% block title %}
+    rubrique_sanitaire
+{% endblock %}
+{% block contenu %}
    <script src="{{ asset('jquery-3.2.1.min.js') }}"></script>
     <script>
         $(document).ready(function () {
@@ -14,53 +15,48 @@
 
         });
     </script>
+<style>
+    h1{
+        color: #b10837;
+       padding-top: 50px;
+        padding-left: 400px;
+    }
+    p{
+        color:#0b0b0b;
+        font-weight: bold;
+        font-family: "Yu Gothic UI Semibold";
+    }
+  .premier{
+      left: 800px;
+      font-weight: bold;
+      font-size: large;
+      position: relative;
+
+    }
+    a{
+        color: #b10837;
+    }
+    .deuxieme{
+        left:430px;
+        position:relative;
+        top: -30px;
+
+    }
+</style>
 
 </head>
 <body>
     {% for rubrique in rubriques %}
        <h1>{{ rubrique.titre }} </h1>
-        <h3>{{ rubrique.date|date('Y-M-d') }}</h3> <br> <br>
+        <br><br>
           <p> {{ rubrique.contenu }}</p>
-        <img src="{{ asset('uploads/images/')}}{{ rubrique.image }}" width="300" height="200">
-        <a href="{{ asset('uploads/images/' ~ rubrique.brochure) }}">View brochure (PDF)</a>
-        <div>
-            <input type="button" id="h" value="commenter" align="center"></div> <br> <br>
-
-        <div><a href="{{ path('showcomments',{'id':rubrique.id })}}" class="o">{{ rubrique.nbcommentaire }} les commentaires</a> </div>
-        <div hidden="hidden" id="f">
-            <form id="form1">
-            <input type="text" name="ob" id="ob">
-        <p id="idpub"hidden="hidden">{{ rubrique.id}}</p>
-            <input type="submit" value="valider" id="btn1">
-            </form>
-        </div>
+        <br><br>
+       <div align="center"><img src="{{ asset('uploads/images/')}}{{ rubrique.image }}" width="400" height="200"></div>
+       <div class="premier"><a  href="{{ asset('uploads/images/' ~ rubrique.brochure) }}">For more information (PDF)</a></div>
+        <div class="deuxieme"><a href="{{ path('showcomments',{'id':rubrique.id })}}" class="o">{{ rubrique.nbcommentaire }} les commentaires</a> </div>
 
     {% endfor %}
-
-    <script>
-        $(document).ready(function () {
-
-            $("#form1").submit(function(event) {
-                event.preventDefault();
-                var objet = $('#ob').val();
-                var id_publication=$('#idpub').html();
-                var DATA = {'id_publication':id_publication,'objet':objet};
-                $.ajax({
-                    type: "POST",
-                    url: "{{ path('ajoutercomments') }}",
-                    data: DATA,
-                    success: function (data) {
-                        alert(data);
-
-                    }
-                });
-
-            });
-          });
-    </script>
-
     <script type="text/javascript">
-        ('#form1').hidden();
         $('.o').click(function(){
 
             var url = $(this).attr('href').replace(/.html.twig/,'-showcomments.html.twig');
@@ -80,8 +76,6 @@
 
 
 </div>
-
-</body>
-</html>
+    {% endblock %}
 
 

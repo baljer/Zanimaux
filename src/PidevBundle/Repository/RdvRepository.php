@@ -26,8 +26,12 @@ class RdvRepository extends \Doctrine\ORM\EntityRepository
         return $q->getResult();
 
     }
-
-
+public  function afficherfournisseur()
+{
+    $q=$this->getEntityManager()
+        ->createQuery("SELECT u FROM PidevBundle:User u WHERE u.type_service in ('Veterinaire','Animal_sitting','Dresseur','Toiletteur')");
+    return $q->getResult();
+}
     public function afficherRdvArctionpourmembre($id)
     {
         $q = $this->getEntityManager()

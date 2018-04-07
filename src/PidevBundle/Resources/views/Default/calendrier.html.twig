@@ -22,7 +22,106 @@
 <link rel="stylesheet" type="text/css" media="screen"
       href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
 <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+<style>
 
+    .popup{
+        width:400px;
+        height:180px;
+        background-color:#ffdfe5;
+        border-radius: 4px;
+       margin: auto;
+        z-index: 1000;
+        display: none;
+        position: absolute;
+        left: 50%;
+        margin-left: -200px;
+        top: 400px;
+    }
+    .popup1{
+        width:400px;
+        height:250px;
+        background-color:#ffdfe5;
+        border-radius: 4px;
+        margin: auto;
+        z-index: 1000;
+        display: none;
+        position: absolute;
+        left: 50%;
+        margin-left: -200px;
+        top: 250px;
+    }
+    .lala{
+        font-size: 15px;
+        line-height:100px;
+
+    }
+    .bo{
+        background-color:#b10837;
+        text-align: center;
+        padding: 10px 10px;
+        text-decoration: none;
+        text-transform: uppercase;
+        color: #FFFFFF;
+    }
+    #close{
+        width: 20px;
+        height:20px;
+        line-height:20px;
+        font-size: 20px;
+        border-radius:50%;
+        border: 2px solid;
+        color: #FF6B6B;
+        float: right;
+        cursor: pointer;
+    }
+    #close1{
+        width: 20px;
+        height:20px;
+        line-height:20px;
+        font-size: 20px;
+        border-radius:50%;
+        border: 2px solid;
+        color: #FF6B6B;
+        float: right;
+        cursor: pointer;
+    }
+    .cover{
+  width:100%;
+        height:100%;
+        position:absolute;
+        top: 10;
+        left: 0;
+        display: none;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 999;
+
+    }
+    .cover1{
+        width:100%;
+        height:100%;
+        position:absolute;
+        top: 10;
+        left: 0;
+        display: none;
+        background-color: rgba(0,0,0,0.5);
+        z-index: 999;
+
+    }
+    .cal{
+        position:center;
+        margin:0 auto;
+        text-align: center;
+
+    }
+    .type1{
+        position:center;
+        margin:0 auto;
+        text-align: center;
+
+    }
+
+
+</style>
 <script>
 
     $(document).ready(function () {
@@ -43,7 +142,10 @@
 
 
                 eventClick: function(calEvent, jsEvent, view) {
-                   $("#cal").show();
+                    $(".cover").fadeIn('slow');
+                    $(".popup").fadeIn('slow');
+
+
                        // $("#startTime").val(moment(calEvent.start).format('YYYY-MM-DD HH:mm:ss'));
                     $("#titre").html(calEvent.title);
                     $("#description").html(calEvent.descritption);
@@ -81,10 +183,29 @@
         });
 
 </script>
-
-<div id="cal" hidden="hidden">
-    <input type="button" value="suprimer" id="lien1" onClick="window.location.reload()">
-    <input type="button" value="update" id="lien2"></div>
+<div class="cal" align="center">
+    <div class="popup">
+        <span id="close">&times;</span>
+        <p class="lala">do you want to delete or update your appointement</p>
+    <input type="button"  value="suprimer" id="lien1" class="bo">
+        <input type="button" value="update" id="lien2" class="bo"></div></div>
+    <div class="cover"></div>
+ <script>
+     $(document).ready(function () {
+         $('#close').mouseenter(function () {
+             $(".cover").fadeOut('slow');
+             $(".popup").fadeOut('slow');
+         });
+     });
+ </script>
+    <script>
+        $(document).ready(function () {
+            $('#close1').mouseenter(function () {
+                $(".cover").fadeOut('slow');
+                $(".popup1").fadeOut('slow');
+            });
+        });
+    </script>
    <script>
        $(document).ready(function () {
          $('#lien1').click(function () {
@@ -105,12 +226,15 @@
 
              });
          });
+
        });
    </script>
 <script>
     $(document).ready(function () {
         $('#lien2').click(function () {
-            $('#type1').show();
+            $(".popup").fadeOut('slow');
+            $(".popup1").fadeIn('slow');
+
         });});
 </script>
 <script>
@@ -147,16 +271,20 @@
 <p id="description" hidden="hidden"></p>
 <p id="idfournisseur" hidden="hidden"></p>
 
-<div hidden="hidden" id="type1">
-
+<div class="type1" align="center">
+<div class="popup1">
+    <span id="close1">&times;</span>
+    <p class="lala"> update your appointement and check your email</p>
+    type consultation:<p id="titre"></p>
 <div id="date" class="input-append date">
-    <input type="text" id="startTime"> Time du rendez vous :</input><br>
+    <input type="text" id="startTime" > Time du rendez vous :</input><br>
     <span class="add-on">
                 <i date-time-icon="icon-time" date-date-icon="icon-calendar"></i>
                </span> </div>
-type consultation:<p id="titre"></p>
-    <input type="submit" value="valider" id="v1" onClick="window.location.reload()">
+
+    <input type="submit" value="valider" id="v1" onClick="window.location.reload()" class="bo">
 </div>
+    <div class="cover1"></div>
 <script type="text/javascript">
     $('#date').datetimepicker({
         format: 'yyyy-MM-dd hh:mm:ss',

@@ -1,13 +1,18 @@
-<html>
-<head>
+{% extends 'PidevBundle::layoutMembre.html.twig' %}
+{% block title %}
+    prise redv
+{% endblock %}
+{% block contenu %}
     <script src="{{ asset('jquery-3.2.1.min.js') }}"></script>
     <style>
 
-      img{
+      .i{
             display:inline-block;
-            width: 200px;
-            height: 200px;
+            width: 250px;
+            height: 250px;
             border: none;
+
+
 
 
         }
@@ -38,8 +43,8 @@
       #divimage span.title{
             position: absolute;
             top: 45px;
-            left: 15px;
-            color:#f0f0f0;
+            left: 25px;
+            color:#b10837;
             font-weight: bolder;
             font-size: 1.2em;
           z-index:2;
@@ -55,7 +60,111 @@
 
         }
 
+      #divimage span.title1{
+          position: absolute;
+          top: 45px;
+          left: 130px;
+          color:#b10837;
+          font-weight: bolder;
+          font-size: 1.2em;
+          z-index:2;
+      }
+      #divimage span.title2{
+          position: absolute;
+          top: 45px;
+          left: 180px;
+          color:#b10837;
+          font-weight: bolder;
+          font-size: 1.2em;
+          z-index:2;
+      }
+        #image1{
+            border: 5px solid #b0b0b0; margin: 5px 6px 15px 6px;
+        }
+        #image2{
+            border : 5px solid #b0b0b0; margin : 5px 25px 15px 75px;
+        }
+      #image3{
+          border : 5px solid #b0b0b0; margin : 5px 25px 15px 144px;
+      }.kbir{
+                 align:center;
+              padding-left:220px;
 
+             }
+      #btn1{
+          background-color:#b10837;
+          text-align: right;
+          padding: 10px 10px;
+          text-decoration: none;
+          text-transform: uppercase;
+          color: #FFFFFF;
+          size:25cm;
+          left:40%;
+          display: block;
+          position: relative;
+          top:0px;
+
+      }
+      #btn2{
+          background-color:#b10837;
+          text-align: right;
+          padding: 10px 10px;
+          text-decoration: none;
+          text-transform: uppercase;
+          color: #FFFFFF;
+          size:25cm;
+          left:55%;
+          display: block;
+          position: relative;
+          top:0px;
+
+      }
+      #btn3{
+          background-color:#b10837;
+          text-align: right;
+          padding: 10px 10px;
+          text-decoration: none;
+          text-transform: uppercase;
+          color: #FFFFFF;
+          size:25cm;
+          left:90%;
+          display: block;
+          position: relative;
+          top:0px;
+
+      }
+      fieldset{
+          border: 1px solid rgb(255, 124, 250);
+          width: 600px;
+          margin:auto;
+      }
+        .l{
+            color: #b10837;
+            left: 250px;
+            font-weight: bold;
+            font-size: large;
+            padding-left:100px;
+        }
+        .label2{
+            color: #b10837;
+            left: 400px;
+            font-weight: bold;
+            font-size: large;
+        }
+        .i2{
+            padding-left:20px;
+        }
+      .l4{
+          color: #0b0b0b;
+          font-weight: bold;
+          font-size: large;
+      }
+        p{
+            color:#b10837;
+            font-weight: bold;
+            font-size: large;
+            padding-left:300px;
+        }
 
     </style>
 
@@ -63,36 +172,37 @@
 
 </head>
 <body>
-
+<div class="kbir">
 <div id="divimage">
     <a href="#">
-        <span class="title">le nombre de rendez vous d 'aujourd'hui est: {{ nombre1 }}</span>
+        <span class="title">{{ nombre1 }} appointments for today</span>
         <span class="bg"></span>
-<img src={{ asset('images/e7.jpg') }} alt="" id="image1"/></a> <br> <br>
+<img src={{ asset('images/rendez.jpg') }} alt="" id="image1" class="i"/></a> <br> <br>
+    <br><br>
     <input type="submit" value="Today" id="btn1">
 </div>
 <div id="divimage">
     <a href="#">
-        <span class="title">le nombre de rendez vous de demain est: {{ nombre2 }}</span>
+        <span  class="title1"> {{ nombre2 }} appointments for tomorrow</span>
         <span class="bg"></span>
-        <img src={{ asset('images/e7.jpg') }} alt="" id="image2"/></a> <br> <br>
+        <img src={{ asset('images/rendez.jpg') }} alt="" id="image2" class="i"/></a> <br> <br>    <br><br>
     <input type="submit" value="tomorrow" id="btn2">
 </div>
 <div id="divimage">
     <a href="#">
-        <span class="title">le nombre de rendez vous pendant cette semaine est: {{ nombre3 }}</span>
+        <span class="title2">{{ nombre3 }} appointments for this week</span>
         <span class="bg"></span>
-        <img src={{ asset('images/e7.jpg') }} alt="" id="image3"/></a> <br> <br>
+        <img src={{ asset('images/rendez.jpg') }} alt="" id="image3" class="i"/></a> <br><br>    <br><br>
     <input type="submit" value="this week" id="btn3">
 </div>
-
+</div>
 <br> <br>
 <script>
     $(function() {
         $('#btn1').click(function () {
             $("#div1").show();
             $("#div2").hide();
-            $("#div2").hide();
+            $("#div3").hide();
         });
     });
 
@@ -101,8 +211,8 @@
     $(function() {
         $("#btn2").click(function () {
             $("#div1").hide();
-            $("#div2").show();
             $("#div3").hide();
+            $("#div2").show();
         });
     });
 
@@ -122,21 +232,20 @@
 
 <div id="div1" hidden="hidden">
     {% for rdv in rdvs1 %}
-        <form> <fieldset>
-                <table>
-                    <tr>
-                        <td> <label>Date du rendez vous </label></td>
-                        <td> {{ rdv.dateRdv|date }}</td></tr>
-                    <tr>
-                        <td> <img src="{{ asset(rdv.idMembre.url_image) }}"/></td>
-
-                    <tr>
-                        <td> {{ rdv.idMembre.nom }} {{ rdv.idMembre.prenom }}</td></tr>
+        <form> <fieldset><legend></legend>
+                <td>
                     <tr>
 
-                        <td>  {{ rdv.typeConsultation }}</td></tr>
+                         <label class="l">Date du rendez vous :</label>
+                         <label class="label2">{{ rdv.dateRdv|date }}</label></tr>
+                    <tr>
+                        <td align="center" rowspan="2"> <img src="{{ asset(rdv.idMembre.url_image) }}" class="i2"/></td>
+                    <tr><label class="l4">{{  rdv.idMembre.nom }} {{ rdv.idMembre.prenom }}:</label></tr>
+
+                    <tr>{{ rdv.typeConsultation }} pour son animal</tr></td></tr>
 
                 </table>
+                <p>{{ rdv.prixConsultation }}DT</p>
             </fieldset>
         </form>
 
@@ -145,21 +254,21 @@
 
 <div id="div2" hidden="hidden">
     {% for rdv1 in rdvs2 %}
-        <form> <fieldset>
-                <table>
+        <form> <fieldset><legend></legend>
+<table>
                     <tr>
-                        <td> <label>Date du rendez vous </label></td>
-                        <td> {{ rdv1.dateRdv|date }}</td></tr>
-                    <tr>
-                        <td> <img src="{{ asset(rdv1.idMembre.url_image) }}"/></td>
+                        <label class="l">Date du rendez vous: </label>
+                     <label class="label2">{{ rdv1.dateRdv|date }}</label></tr>
 
-                    <tr>
-                        <td> {{ rdv1.idMembre.nom }} {{ rdv1.idMembre.prenom }}</td></tr>
-                    <tr>
+                        <td align="center" rowspan="2"> <img src="{{ asset(rdv1.idMembre.url_image) }}" class="i2"/></td>
 
-                        <td>  {{ rdv1.typeConsultation }}</td></tr>
+                     <div class="i3">
+                         <td><label class="l4">{{ rdv1.idMembre.nom }} {{ rdv1.idMembre.prenom }} :</label></td>
+
+                        <td>{{ rdv1.typeConsultation }} pour son animal</td></div></tr>
 
                 </table>
+                <p>{{ rdv1.prixConsultation }}DT</p>
             </fieldset>
         </form>
 
@@ -168,30 +277,23 @@
 
 <div id="div3" hidden="hidden">
     {% for rdv2 in rdvs3 %}
-        <form> <fieldset>
+        <form> <fieldset><legend></legend>
                 <table>
                     <tr>
-                        <td> <label>Date du rendez vous </label></td>
-                        <td> {{ rdv2.dateRdv|date }}</td></tr>
-                    <tr>
-                        <td> <img src="{{ asset(rdv2.idMembre.url_image) }}"/></td>
 
-                    <tr>
-                        <td> {{ rdv2.idMembre.nom }} {{ rdv2.idMembre.prenom }}</td></tr>
-                    <tr>
+                       <label class="l">Date du rendez vou: </label>
+                     <label class="label2">{{ rdv2.dateRdv|date }}</label></tr>
 
-                        <td>  {{ rdv2.typeConsultation }}</td></tr>
+                        <td align="center"rowspan="2"> <img src="{{ asset(rdv2.idMembre.url_image) }}" class="i2"/></td>
 
+                    <td> <label class="l4">{{ rdv2.idMembre.nom }} {{ rdv2.idMembre.prenom }}:</label></td>
+
+                    <td> {{ rdv2.typeConsultation }} pour son animal</td></tr>
                 </table>
+                <p>{{ rdv2.prixConsultation }}DT</p>
             </fieldset>
         </form>
 
     {% endfor %}
 </div>
-
-</body>
-
-
-
-
-</html>
+{% endblock %}

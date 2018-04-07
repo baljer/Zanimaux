@@ -67,19 +67,20 @@
                             <li><a href="shop.html">Events/Contest</a></li>
                             <li><a href="shop.html">Posts</a></li>
                             <li>
-                                <a>RDV</a>
+                                <a href="{{ path('pidev_front_homepage') }}">RDV</a>
                                       <ul class="submenu">
                                       <li><a href="{{ path('chercher') }}">Ajouter votre rendez vous</a></li>
                                       <li><a href="{{ path('afficher') }}">Consulter votre rendez vous</a></li>
+                                          <li><a href="{{ path('compter') }}">Consulter les rendez vous</a></li>
 
                                   </ul>
-
-
-
                             </li>
+                            <li><a href="{{ path('pidev_front_homepage') }}">Rubrique_Sanitaire</a>
+                                <ul class="submenu">
+                                    <li><a href="{{ path('afficher_rubrique') }}">Consulter la rubrique du jour</a></li>
 
-
-
+                                </ul>
+                            </li>
                             <li><a href="experiance.html">Forum</a></li>
                             <div class="clear"></div>
                         </ul>

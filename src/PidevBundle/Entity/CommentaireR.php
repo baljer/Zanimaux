@@ -32,7 +32,7 @@ class CommentaireR
      *   @ORM\JoinColumn(name="id_publication",referencedColumnName="id")
      * })
      */
-    private $id_publication;
+    public $id_publication;
 
     /**
      * @var \DateTime

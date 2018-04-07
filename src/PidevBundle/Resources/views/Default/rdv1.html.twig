@@ -7,6 +7,49 @@
 <link rel="stylesheet" href={{ asset('css/fwslider.css') }} media="all">
 <script src={{ asset('js/jquery-ui.min.js') }}></script>
 <script src={{ asset('js/fwslider.js') }}></script>
+    <style>
+        .bo{
+            background-color:#b10837;
+            text-align: center;
+            padding: 7px 7px;
+            text-decoration: none;
+            text-transform: uppercase;
+            color: #FFFFFF;
+           size:20cm;
+
+        }
+        .mytext{
+            font-size:15pt;
+              size: 20cm;
+            border-color: #ffdfe5;
+
+
+        }
+        #k{
+            display: inline;
+
+        }
+        fieldset{
+            border: 1px solid rgb(255, 124, 250);
+            width: 600px;
+            margin:auto;
+        }
+        .bo1{
+            background-color:#b10837;
+            text-align: right;
+            padding: 7px 7px;
+            text-decoration: none;
+            text-transform: uppercase;
+            color: #FFFFFF;
+            size:20cm;
+            left:40%;
+            display: block;
+            position: relative;
+            left: 120%;
+           top:-20px;
+
+        }
+    </style>
 
 <!--end slider -->
 <script type="text/javascript">
@@ -41,81 +84,31 @@
     });
 </script>
 </head>
-
-<div class="banner">
-    <!-- start slider -->
-    <div id="fwslider">
-        <div class="slider_container">
-            <div class="slide">
-                <!-- Slide image -->
-                <img src={{ asset('images/toiletteur.jpg') }} class="img-responsive" alt=""/>
-                <!-- /Slide image -->
-                <!-- Texts container -->
-                <div class="slide_content">
-                    <div class="slide_content_wrap">
-                        <!-- Text title -->
-                        <h1 class="title">Welcome we are <br>groomers</h1>
-
-                    </div>
-                </div>
-                <!-- /Texts container -->
-            </div>
-            <!-- /Duplicate to create more slides -->
-            <div class="slide">
-                <img src={{ asset('images/vetoo.jpg') }} class="img-responsive" alt=""/>
-                <div class="slide_content">
-                    <div class="slide_content_wrap">
-                        <h1 class="title">For the care of your animal<br>veterinarians</h1>
-                    </div>
-                </div>
-            </div>
-            <!--/slide -->
-        <div class="slide">
-            <img src={{ asset('images/dressage.jpg') }} class="img-responsive" alt=""/>
-            <div class="slide_content">
-                <div class="slide_content_wrap">
-                    <h1 class="title">For the train your pet<br>trainer are here</h1>
-                </div>
-            </div>
-        </div>
-            <div class="slide">
-                <img src={{ asset('images/a.jpg') }} class="img-responsive" alt=""/>
-                <div class="slide_content">
-                    <div class="slide_content_wrap">
-                        <h1 class="title">be happy for you animal<br>Animalsitting is here</h1>
-                    </div>
-                </div>
-            </div>
-        <!--/slide -->
-    </div>
-        <div class="timers"></div>
-        <div class="slidePrev"><span></span></div>
-        <div class="slideNext"><span></span></div>
-    </div>
-    <!--/slider -->
-    <br>
-    <div align="center">
+    <br><br><br>
+    <div align="center" id="k">
 
         {{ form_start(f) }}
-        {{ form_widget(f.type_service,{'attr':{'class':'style'}}) }}
-        {{ form_widget(f.adresse,{'attr':{'class':'style'}}) }}
-        {{ form_widget(f.chercher,{'attr':{'class':'style'}}) }}
+      <label>search by service</label>  {{ form_widget(f.type_service,{'attr':{'class':'mytext'}}) }}
+        <label>place</label>{{ form_widget(f.adresse,{'attr':{'class':'mytext'}}) }}
+        {{ form_widget(f.chercher,{'attr':{'class':'bo'}}
+        )  }}
         {{ form_end(f) }}</div>
+    <br><br>
     <div>
         {% for u in users %}
-            <form> <fieldset>
-
+            <form> <fieldset> <legend></legend>
                     <table>
                         <tr>
-                            <td> <img src="{{ asset(u.url_image) }}" id="1"/> {{ u.nom }} {{ u.prenom }}
-                            {{ u.information }} {{ u.adresse }}
-                            </td>
+                            <td align="center" rowspan="2"> <img src="{{ asset(u.url_image) }}" id="1"/>
+                            <td>   {{ u.nom }} {{ u.prenom }} ,</td>
+                            <td> {{ u.information }} {{ u.adresse }}</td>
+                        <tr></tr>
+                        </td>
                         </tr>
 
-                        <tr>
-                            <td><a href="{{ path('prendre_rdv',{'id':u.id })}}"><input type="button" value="prendre rendez_vous"></a></td>
 
-                        </tr>
+                            <td align="center"><a href="{{ path('prendre_rdv',{'id':u.id })}}"><input type="button" value="prendre rendez_vous" class="bo1"></a></td>
+
                     </table>
                 </fieldset>
             </form>
