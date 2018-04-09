@@ -8,6 +8,7 @@
 
 namespace PidevBundle\Controller;
 use PidevBundle\Entity\CommentaireR;
+use PidevBundle\Entity\ReponseC;
 use PidevBundle\Entity\Rubrique_sanitaire;
 use PidevBundle\Entity\User;
 use PidevBundle\PidevBundle;
@@ -51,13 +52,14 @@ class Commentaire_rubriqueController extends Controller
     }
     public function supprimerCommentaireAction(Request $request)
     {
-        echo ("hhhhhhhhhh");
+
         if ($request->isXmlHttpRequest()) {
         $em = $this->getDoctrine()->getManager();
         $id1 = $request->get('id');
     $iduser= $em->getRepository(User::class)->findOneBy(array('id' =>34));
        $commentaire = $em->getRepository(CommentaireR::class);
         $commentaire1=$commentaire->findOneBy(array('id'=>$id1));
+        $reponse=$em->getRepository(ReponseC::class)->deletelesreponses($commentaire1);
         $rubrique=$commentaire1->getIdPublication();
         $commentaire->deleteCommentaire($id1,$iduser);
         $rubrique->setNbcommentaire($rubrique->getNbcommentaire()-1);
